@@ -2,7 +2,7 @@ import mysql.connector
 import csv
 from io import StringIO
 import pandas as pd
-
+import os
 # Configuración de la base de datos
 db_config = {
     'host': '#', 
@@ -50,9 +50,9 @@ print(results_df)
 
 # Opcional: Guardar a S3 si es necesario
 storage_options = {
-    'key': '#',
-    'secret': '#',
-    'token': '#'
+    'key': os.getenv('AWS_ACCESS_KEY_ID'), 
+    'secret': os.getenv('AWS_SECRET_ACCESS_KEY'), 
+    'token': os.getenv('AWS_SESSION_TOKEN') 
 }
 
 # Guardar el DataFrame como CSV en un servicio externo (como S3)
