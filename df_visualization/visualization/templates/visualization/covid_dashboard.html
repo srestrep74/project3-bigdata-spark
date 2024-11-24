@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <h1 class="text-center mb-4">COVID-19 Dashboard</h1>
+    
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
+    
+    {% if dataframes %}
+        {% for name, df_info in dataframes.items %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4>{{ df_info.business_question }}</h4>
+            </div>
+            <div class="card-body">
+                {{ df_info.table|safe }}
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        {% if not error %}
+        <div class="alert alert-info" role="alert">
+            No hay datos disponibles para mostrar.
+        </div>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}
