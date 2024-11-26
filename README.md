@@ -32,7 +32,6 @@ Este proyecto automatiza la captura, ingesta, procesamiento y salida de datos ac
 
 ## Uso
 1. **Automatización del Clúster EMR**: Ejecuta `cluster_creation.ipynb` para crear y configurar automáticamente un clúster EMR en AWS.
-2. **Procesamiento de Datos y Automatización de ETL**: Ejecuta los scripts en la carpeta `scripts/` para automatizar procesos ETL y consultas con SparkSQL.
 
 ## Proceso Automatizado
 El proyecto utiliza un script principal `cluster_creation.py` que automatiza todo el proceso de análisis de datos. Este script realiza las siguientes operaciones secuencialmente:
