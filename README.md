@@ -29,23 +29,51 @@ Este proyecto automatiza la captura, ingesta, procesamiento y salida de datos ac
 - Jupyter Notebook
 - [Otras dependencias necesarias]
 
-## Instalación
-1. Clona el repositorio:
-   ```bash
-   git clone https://github.com/tu_usuario/project3-bigdata-spark.git
-   ```
-2. Configura el entorno virtual:
-   ```bash
-   cd project3-bigdata-spark
-   python -m venv venv
-   source venv/bin/activate  # En Windows usa `venv\Scripts\activate`
-   pip install -r requirements.txt
-   ```
 
 ## Uso
 1. **Automatización del Clúster EMR**: Ejecuta `cluster_creation.ipynb` para crear y configurar automáticamente un clúster EMR en AWS.
-2. **Procesamiento de Datos**: Usa los notebooks en la carpeta `notebooks/` para realizar análisis y procesamiento de datos.
-3. **Automatización de ETL**: Ejecuta los scripts en la carpeta `scripts/` para automatizar procesos ETL y consultas.
+2. **Procesamiento de Datos y Automatización de ETL**: Ejecuta los scripts en la carpeta `scripts/` para automatizar procesos ETL y consultas con SparkSQL.
+
+## Proceso Automatizado
+El proyecto utiliza un script principal `cluster_creation.py` que automatiza todo el proceso de análisis de datos. Este script realiza las siguientes operaciones secuencialmente:
+
+1. **Extracción de Datos**
+   - Conecta con la API de datos.gov.co mediante Socrata
+   - Extrae hasta 1,000,000 registros de datos COVID
+   - Almacena los datos iniciales en un DataFrame de pandas
+
+2. **Creación y Configuración del Cluster EMR**
+   - Configura un cluster EMR con las siguientes características:
+     - 1 nodo Master (m5.xlarge)
+     - 2 nodos Core (m5.xlarge)
+     - 1 nodo Task (m5.xlarge)
+   - Instala aplicaciones necesarias: Spark, Hadoop, Hive, JupyterHub, etc.
+
+3. **Pasos Automatizados del Proceso**
+   El cluster ejecuta automáticamente los siguientes pasos:
+   1. Instalación de dependencias Python necesarias
+   2. Carga de datos a S3 (load_s3.py)
+   3. Proceso ETL (ETL.py)
+   4. Manipulación de DataFrames (dataframes.py)
+   5. Consultas SparkSQL (Sparksql.py)
+   6. Ejecución del Crawler para catalogar datos
+
+## Ejecución del Proceso
+Para ejecutar todo el proceso automatizado:
+
+1. Asegúrate de tener configuradas las credenciales de AWS
+2. Ejecuta el script principal:
+   ```bash
+   python scripts/cluster_creation.py
+   ```
+3. El proceso creará el cluster EMR y ejecutará todos los pasos automáticamente
+4. Los resultados se almacenarán en el bucket S3 especificado
+
+## Directorios en S3
+- **RAW**: Datos crudos iniciales en S3
+- **Processed**: Datos después del proceso ETL
+- **Refined**: Resultados finales de análisis
+- **EMR/logs**: Logs del proceso de ejecución
 
 ## Preguntas de Negocio Analizadas
 1. **Distribución geográfica de casos**: Identificación de zonas de mayor incidencia.
@@ -63,6 +91,9 @@ Este proyecto automatiza la captura, ingesta, procesamiento y salida de datos ac
 
 ## Resultados
 Los resultados del análisis de datos se almacenan en un bucket S3 en la zona Refined y pueden ser consultados mediante Athena o API Gateways.
+
+## Video
+https://www.youtube.com/watch?v=5EQA9WJoYGY
 
 
 
