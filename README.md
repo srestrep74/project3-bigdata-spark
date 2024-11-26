@@ -41,6 +41,7 @@ El proyecto utiliza un script principal `cluster_creation.py` que automatiza tod
    - Conecta con la API de datos.gov.co mediante Socrata
    - Extrae hasta 1,000,000 registros de datos COVID
    - Almacena los datos iniciales en un DataFrame de pandas
+   - Luego, mediante el script ingest.py, se obtienen datos de la base de datos MySQL de una instancia EC2 , y se montan a S3.
 
 2. **Creación y Configuración del Cluster EMR**
    - Configura un cluster EMR con las siguientes características:
@@ -57,6 +58,7 @@ El proyecto utiliza un script principal `cluster_creation.py` que automatiza tod
    4. Manipulación de DataFrames (dataframes.py)
    5. Consultas SparkSQL (Sparksql.py)
    6. Ejecución del Crawler para catalogar datos
+   7. Visualización de datos desde Athena o API Gateways con app en Django.
 
 ## Ejecución del Proceso
 Para ejecutar todo el proceso automatizado:
@@ -68,6 +70,9 @@ Para ejecutar todo el proceso automatizado:
    ```
 3. El proceso creará el cluster EMR y ejecutará todos los pasos automáticamente
 4. Los resultados se almacenarán en el bucket S3 especificado
+
+## Automatización Diaria
+El proyecto está configurado para ejecutarse automáticamente todos los días mediante una instancia EC2 que utiliza cronie (cron daemon). La configuración es la siguiente:
 
 ## Directorios en S3
 - **RAW**: Datos crudos iniciales en S3
