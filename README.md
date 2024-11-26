@@ -1,5 +1,12 @@
 # project3-bigdata-spark
 
+## Integrantes : 
+- Sebastian Restrepo Ortiz
+- Juan Manuel Gomez Piedrahita
+- Luisa Maria Alvarez Garcia
+- Miguel Angel Hoyos
+- Santiago Neusa
+
 ## Descripción del Proyecto
 Este proyecto automatiza la captura, ingesta, procesamiento y salida de datos accionables para la gestión de datos de Covid en Colombia. Utiliza una arquitectura batch para big data, empleando tecnologías como Apache Spark y AWS EMR.
 
